@@ -1,0 +1,88 @@
+/* pages/home/list.wxss */
+.train-view{}
+.train-head{
+  display: flex;
+  padding: 10px;
+  align-items: center;
+  margin-top: 5px;
+  background: #fff;
+}
+.train-head > view{
+  flex: 1;
+}
+
+.train-head-cover image{
+  width: 30px;
+  height: 30px;
+  
+}
+.train-head-city{
+ text-align: center;
+}
+.train-head-time{
+  text-align: right;
+}
+
+/* 列表页 */
+.train-list{
+  padding-top: 8px;
+}
+.train-item{
+  padding: 15px 10px;
+  background: #fff;
+}
+.train-item + .train-item{
+  margin-top: 8px;
+}
+.train-itop{
+  display: flex;
+  padding-bottom: 10px;
+}
+.train-itop view{
+  flex: 3;
+}
+.train-itop .train-itop-two{
+  flex: 2;
+  font-size: 12px;
+  text-align: center;
+}
+.train-itop-one .blue{
+  font-size: 20px;
+  font-weight: 600;
+  color: #19a0f0;
+}
+.train-hr{
+  display: flex;
+  align-items: center;
+}
+.train-hr .inline{
+  flex: 1;
+  border-bottom: 2px solid #f0f0f0;
+}
+.train-hr .radius{
+  width: 6px;
+  height: 6px;
+  background: #e5e5e5;
+  border-radius: 10px;
+}
+
+.train-itop-three{
+  text-align: right;
+}
+.train-itop-three view:nth-child(1){
+  font-size: 18px;
+}
+.train-itop-four{
+  text-align: right;
+  font-size: 20px;
+  font-weight: 800;
+  color: #ff6913;
+}
+
+.train-ibottom{
+  display: flex;
+}
+.train-ibottom text{
+  width: 25%;
+  font-size: 12px;
+}

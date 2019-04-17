@@ -1,0 +1,9 @@
+{
+  "pages":[
+    "pages/home/index",
+    "pages/home/list"
+  ],
+  "window":{
+    "navigationStyle": "custom"
+  }
+}

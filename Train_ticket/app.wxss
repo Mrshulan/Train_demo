@@ -1,0 +1,47 @@
+page{
+  background: #f5f5f5;
+}
+.container{
+  font-size: 14px;
+  color: #222;
+}
+
+/* 导航头 */
+
+/* 固定定位
+.header-nav{
+  position: fixed;
+  width: 100%;
+} 
+.header-nav + .container{
+  padding-top: 63px;
+}
+*/
+
+/* 分块计算 */
+.header-nav{
+  display: flex;
+  background: #19a0f0;
+  color: #fff;
+  padding: 25px 0 8px;
+}
+.return-btn{
+  padding-right: 5px;
+}
+.return-btn image{
+  display: block;
+  width: 30px;
+  height: 30px;
+}
+.header-nav-title{
+  flex: 1;
+  margin-right: 25px;
+  font-size: 14px;
+  height: 30px;
+  line-height: 30px;
+  overflow: hidden;
+}
+.header-nav + .container{
+  height: calc(100vh - 63px);
+  overflow-y: scroll; 
+}
