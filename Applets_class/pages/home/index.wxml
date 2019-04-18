@@ -1,0 +1,74 @@
+<!--pages/home/index.wxml-->
+<view class="container">
+
+  <!-- 头部 -->
+  <view class="header">
+    <navigator class="on" hover-class="on">推荐</navigator>
+    <navigator hover-class="on">歌单</navigator>
+    <navigator hover-class="on">搜索</navigator>
+  </view> 
+
+  <!-- banner -->
+  <view class="home-banner">
+    <swiper indicator-dots
+            autoplay
+            interval="3000"
+            indicator-color="#fff"
+            indicator-active-color="#b3d4db"
+    >
+      <swiper-item wx:for="000">
+        <image src="/images/banner1.jpg"></image>
+      </swiper-item>
+    </swiper>
+  </view>
+    
+  <!-- 国家地区 -->
+  <view class="region-type">
+    <navigator wx:for="00000">
+      <image src="/images/icon/music.png" mode="widthFix"></image>
+      <text>欧美</text>
+    </navigator>
+  </view>
+
+  <!-- 热门歌曲 -->
+  <view class="home-menu">
+
+    <view class="hmenu-item" wx:for="000">
+      
+      <navigator class="hmenu-head" hover-class='none'>
+        <image src="/images/icon/enum.png"></image>
+        <text>热门歌曲</text>
+      </navigator>
+
+      <view class="hmenu-body">
+        <view class="song-list song-view3">
+          <view class="song" wx:for="000000">
+            <image src="/images/1.jpg" mode="widthFix"></image>
+            <text>一百万个可能</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+</view>
+
+<!-- 底部播放器 -->
+<view class="bottom-player">
+
+  <view class="bplayer-cover">
+     <image src="/images/1.jpg" mode="widthFix"></image>
+  </view>
+
+  <view class="bplayer-btn">
+    <image src="/images/icon/player.png"></image>
+  </view>
+
+  <view class="bplayer-album">
+    <text class="substr">一百万个可能</text>
+    <text>歌手</text>
+  </view>
+
+ 
+
+</view>

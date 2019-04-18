@@ -1,0 +1,146 @@
+/* pages/home/index.wxss */
+
+/* header头部 */
+.header{
+  display: flex;
+  padding-bottom: 10px;
+  background: #b3d4db;
+  color: #fff;
+  justify-content: center;
+}
+.header navigator{
+  margin: 0 5px;
+  padding: 0 10px 8px;
+}
+.header navigator.on{
+  background: linear-gradient(#fff,#fff) no-repeat center bottom/ 90% 2px;
+}
+
+/* banner */
+.home-banner{
+  background: linear-gradient(#b3d4db,#b3d4db)
+               no-repeat left top/ 100% 200rpx;
+}
+.home-banner swiper{
+  height: 300rpx;
+}
+.home-banner swiper-item{
+  box-sizing: border-box;
+  padding: 0 10px;
+}
+.home-banner image{
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+/* 国家地区 */
+.region-type{
+  display: flex;
+  justify-content: space-around;
+  padding: 25px 0 10px;
+  border-bottom: 1px solid #efefef;
+}
+.region-type navigator image{
+  width: 80rpx;
+  height: 80rpx;
+}
+.region-type navigator text{
+  display: block;
+  text-align: center;
+}
+
+/* 热门歌曲 */
+.home-menu{
+  margin-top: 25px;
+}
+.hmenu-item{}
+.hmenu-item + .hmenu-item{
+  margin-top: 15px;
+}
+.hmenu-head{
+  padding-bottom: 10px;
+}
+.hmenu-head image{
+  width: 35px;
+  height: 35px;
+  vertical-align: bottom;
+}
+.hmenu-head text{
+  vertical-align: bottom;
+}
+.hmenu-body{
+  padding: 0 10px;
+}
+
+.song-view3 .song{
+  margin-right: 3.5%;
+  width: 31%;
+}
+.song-view3 .song:nth-child(3n){
+  margin-right: 0
+}
+
+.song-list{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.song image{
+  display: block;
+  width: 100%;
+}
+.song text{
+  display: block;
+  padding: 3px 0 8px;
+  font-size: 12px;
+  line-height: 1.5;
+  max-height: 35px;
+  overflow: hidden;
+}
+
+
+/* 底部播放器 */
+.container{
+  padding-bottom: 50px;
+}
+.bottom-player{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 5px 10px;
+  background: #fff;
+  /* box-shadow: 0 -1px 1px #eee; */
+}
+.bplayer-cover{
+  margin-right: 8px;
+  float: left;
+}
+.bplayer-cover image{
+  display: block;
+  width: 40px;
+  height: 40px;
+}
+.bplayer-album{
+  padding-top: 3px;
+  overflow: hidden;
+}
+.bplayer-album text{
+  display: block;
+}
+.bplayer-album text:last-child{
+  font-size: 10px;
+  color: #aeaeae;
+}
+.bplayer-btn{
+  float: right;
+  margin-left: 8px;
+  padding-top: 2.5px;
+}
+.bplayer-btn image{
+  display: block;
+  width: 35px;
+  height: 35px;
+}
