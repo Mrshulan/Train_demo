@@ -1,66 +1,25 @@
-// pages/home/index.js
-Page({
+import pageModule from "../../lib/Page.js"
+import $test from "../../common/test.js";
 
-  /**
-   * 页面的初始数据
-   */
-  data: {
+const $app = getApp()
+const $page = new pageModule()
+const appExample = $app.example;
 
-  },
+console.log($app, $page)
+console.log($app.globalData === appExample.globalData, '都说了是浅拷贝')
+console.log($app.pageData === appExample.pageData, '都说了是浅拷贝')
 
-  /**
-   * 生命周期函数--监听页面加载
-   */
-  onLoad: function (options) {
+$app.globalData.name = 'index'
+appExample.globalData.hobbies = "吃饭睡觉"
 
-  },
+// $testd实例 extend this 指向当前$pagepage
+$page.extend($test)
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
-  }
+$page.addEvent('onLoad', function () {
+  wx.navigateTo({
+    url: '/pages/home/sub'
+  })
 })
+// 这个时候onload事件数组 length = 2
+
+$page.start()

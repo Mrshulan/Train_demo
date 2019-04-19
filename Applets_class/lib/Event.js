@@ -13,25 +13,22 @@ export default class Event {
 
   // 内部来的静态方法->事件队列的触发器 getEvent里边触发队列生成
   static createEventHandle(eType, that) {
-
     // 生成触发器的包装函数 enumerable 所以可以使用Reflect来设置获取
     // that就是实例 实例上的每个 eType 是个函数 返回该 events里边的eType的事件队列的最终结果
     Reflect.set(that, eType, function(...arg) {
       // 将page的this实例保存起来
-      const page = this
-      const data = []
-
+      const page = this;
+      const data = [];
       // 拷贝一份事件队列
       const eTypeFn = Array.from(Reflect.get(that.events, eType))
 
       // 递归实现动画队列
-      (function recur() {
+      ;(function recur() {
         // 出队列
         const f = eTypeFn.shift()
         // f.apply(page, arg) arg eTypeFn 对象函数执行结果通过pushNameSpace到data数组里边
         // -> [{nameSpace:, data: }，....]
         f && data.pushNameSpace(f.apply(page, arg))
-
         eTypeFn.length && recur()
       })()
 

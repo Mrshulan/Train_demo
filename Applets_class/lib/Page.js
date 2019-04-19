@@ -17,7 +17,6 @@ export default class PageModule extends Event{
       }
     })
 
-
     return { events, data }
   }
 
@@ -25,7 +24,7 @@ export default class PageModule extends Event{
     super()
     // 保存当前pageModule
     const pageExample = this
-    // 监听app的 加载事件
+    // 监听全局app的 加载事件 这里onload 长度为 1
     this.oneEvent('onLoad', function () {
       Reflect.set(app, 'page', {
         example: pageExample,
@@ -33,10 +32,12 @@ export default class PageModule extends Event{
         route: this.route
       })
     })
+    
     // 判断是否传入data
     data && this.extend(data)
   }
 
+  // 导出事件队列
   exports(...arg) {
     arg = arg.length ? arg : Object.keys(tihs.events)
 
@@ -52,6 +53,7 @@ export default class PageModule extends Event{
     return events
   }
 
+  // 合并
   extend(obj) {
     // 筛选事件和属性
     const { events, data } = PageModule.select(obj)
@@ -66,8 +68,10 @@ export default class PageModule extends Event{
   // 初始化
   start(data) {
 
+    // data 还需要extend的话
     data && this.extend(data)
 
+    // 因为是置入Page里边， 其实这里边就是一个作用域起到了作用 
     Page(this)
   }
 }
