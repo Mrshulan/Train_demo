@@ -1,6 +1,7 @@
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var uuidv1 = require('uuid/v1')
 var port = process.env.PORT || 3000;
 
 app.use(require('express').static(__dirname));
@@ -22,20 +23,21 @@ let userColor = ['#00a1f4', '#0cc', '#f44336', '#795548', '#e91e63', '#00bcd4', 
 
 // 乱序排列方法，方便把数组打乱
 function shuffle(arr) {
-    let len = arr.length, random;
-    while (0 !== len) {
-        // 右移位运算符向下取整
-        random = (Math.random() * len--) >>> 0; 
-        // 解构赋值实现变量互换
-        [arr[len], arr[random]] = [arr[random], arr[len]]; 
-    }
-    return arr;
+  let len = arr.length, random;
+  while (0 !== len) {
+      // 右移位运算符向下取整
+      random = (Math.random() * len--) >>> 0; 
+      // 解构赋值实现变量互换
+      [arr[len], arr[random]] = [arr[random], arr[len]]; 
+  }
+  return arr;
 }
 
 
 io.on('connection', socket => {
   // 这里每次连接都会创建一个新的 socket
-  let username;
+  let username
+  let userId
   let color
   let rooms = [];
 
@@ -91,6 +93,7 @@ io.on('connection', socket => {
         // 所有客户端的发
         } else {
           io.emit('message', {
+            id: userId,
             user: username,
             content: msg,
             color,
@@ -98,6 +101,7 @@ io.on('connection', socket => {
           })
 
           msgHistory.push({
+            id: userId,
             user: username,
             content: msg,
             color,
@@ -108,6 +112,7 @@ io.on('connection', socket => {
     } else {
       // 第一次进入的话，就可以记录其用户名
       username = msg
+      userId = uuidv1()
       color = shuffle(userColor)[0]
       // 广播除去自己之外的其他人
       socket.broadcast.emit('message', {
@@ -116,7 +121,9 @@ io.on('connection', socket => {
         color,
         createAt: new Date().toLocaleString()
       })
-      // 如： socketObj = { '周杰伦': socket, '谢霆锋': socket }
+      // 单独给你id
+      socket.emit('getId', userId)
+      // 如： socketObj = { '树懒': socket, '水獭': socket }
       socketObj[username] = socket;
     }
   })
@@ -139,7 +146,7 @@ io.on('connection', socket => {
       // 给自己看的
       socket.send({
         user: SYSTEM,
-        content: `你已经加入${room}战队`,
+        content: `你已经加入${room}聊天`,
         color,
         createAt: new Date().toLocaleString()
       })
@@ -156,7 +163,7 @@ io.on('connection', socket => {
 
       socket.send({
         user: SYSTEM,
-        content: `你已经离开${room}战队`,
+        content: `你已经离开${room}聊天`,
         createAt: new Date().toLocaleString()
       })
     }
@@ -165,11 +172,15 @@ io.on('connection', socket => {
 
 })
 
-// // 
-// // io.emit(name, msg) === io.sockets.emit() 表示套接字组 集体广播
-// // socket.emit(name, msg) 表示 用于与每个单独的连接进行通信 只发个发送者客户端
-// // socket.broadcast.emit(name, msg) 除了发送者以外的所有客户端
-// // socket.send(msg) 给自己看的
+
+// io.emit(name, msg) === io.sockets.emit() 表示套接字组 集体广播
+// socket.emit(name, msg) 表示 用于与每个单独的连接进行通信 只发个发送者客户端
+// socket.broadcast.emit(name, msg) 除了发送者以外的所有客户端
+// socket.send(msg) 给自己看的
+
+// namespace(比如/get /post两者不影响): 1.服务端发送的消息有分类，不同的客户端需要接收的分类不同；
+// room(socket.join socket.leave) 2.服务端并不需要对所有的客户端都发送消息，只需要针对某个特定群体发送消息；
+// io.on('connection') === io.of('/').on('connection')
 
 // // 建立连接
 // io.on('connection', function(socket){

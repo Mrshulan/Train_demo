@@ -8,7 +8,7 @@ let userId = '';
 
 // 发言的方法
 function send() {
-    console.log(socket.connected);
+    console.log('socket.connected: ',socket.connected);
     let value = input.value;
     if (value) {
         // 发送消息给服务器
@@ -52,12 +52,12 @@ input.onkeydown = function (event) {
 list.onclick = function (event) {
     privateChat(event);
 };
-// 监听进入房间后，将进入房间按钮隐藏
+// 监听进入房间后(ed过去式)，将进入房间按钮隐藏
 socket.on('joined', room => {
     document.getElementById(`join-${room}`).style.display = 'none';
     document.getElementById(`leave-${room}`).style.display = 'inline-block';
 });
-// 监听离开房间后，将离开房间按钮隐藏
+// 监听离开房间后(ed过去式)，将离开房间按钮隐藏
 socket.on('leaved', room => {
     document.getElementById(`join-${room}`).style.display = 'inline-block';
     document.getElementById(`leave-${room}`).style.display = 'none';
@@ -83,6 +83,7 @@ socket.on('history', history => {
 });
 // 接收服务端传过来的消息
 socket.on('message', data => {
+    // 输出测试一波
     console.log(data);
     console.log('userId', userId);
     let li = document.createElement('li');
