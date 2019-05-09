@@ -1,24 +1,27 @@
 import { Link, Switch, Route } from 'react-router-dom'
 import React from 'react'
 
-const Home = () => (
-  <div>
-    <h1>首页</h1>
-    <Link to='/list'>跳转列表页</Link>
-  </div>
-)
+import Home from './pages/home'
+import List from './pages/list'
 
-const list = [
-  'react',
-  'koa',
-  'react-ssr'
-]
+// const Home = () => (
+//   <div>
+//     <h1>首页</h1>
+//     <Link to='/list'>跳转列表页</Link>
+//   </div>
+// )
 
-const List = () => (
-  <ul>
-    { list.map((item, i) => <li key={ item }>{ item }</li>)}
-  </ul>
-)
+// const list = [
+//   'react',
+//   'koa',
+//   'react-ssr'
+// ]
+
+// const List = () => (
+//   <ul>
+//     { list.map((item, i) => <li key={ item }>{ item }</li>)}
+//   </ul>
+// )
 
 // 前端跳转到列表页，然后刷新页面就会提示404
 export default () => (

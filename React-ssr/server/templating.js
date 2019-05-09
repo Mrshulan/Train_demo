@@ -6,6 +6,9 @@ import { StaticRouter } from 'react-router-dom'
 import RouterConfig from '../app/router'
 import React from 'react'
 
+import { Provider } from 'react-redux'
+import createStore from '../app/redux/store/create'
+
 // 匹配模本中的{{}} 嵌入html代码
 function templating(props) {
   const template = fs.readFileSync(path.join(__dirname, '../template/server.html'), 'utf-8')
@@ -14,14 +17,19 @@ function templating(props) {
 
 export default function (ctx, next) {
   try {
-    ctx.render = () => {
+    ctx.render = (data = {}) => {
+      const store = createStore(data)
+
       const html = renderToString(
-        <StaticRouter location={ ctx.url }>
-          <RouterConfig />
-        </StaticRouter>
+        <Provider store={ store }>
+          <StaticRouter location={ ctx.url }>
+            <RouterConfig />
+          </StaticRouter>
+        </Provider>
       )
       const body = templating({
-        html
+        html,
+        store: JSON.stringify(data, null, 4)
       })
       ctx.body = body
     }

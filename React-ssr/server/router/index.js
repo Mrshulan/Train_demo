@@ -12,7 +12,12 @@ routes.get('/', (ctx, next) => {
   //     <RouterConfig/>
   //   </StaticRouter>
   // )
-  ctx.render()
+  ctx.render({
+    home: {
+      loaded: false,
+      title: 'redux在node端获取的'
+    }
+  })
   next()
 })
 
@@ -22,7 +27,16 @@ routes.get('/list', (ctx, next) => {
   //     <RouterConfig />
   //   </StaticRouter>
   // )
-  ctx.render()
+  ctx.render({
+    list: {
+      loaded: false,
+      list: [
+        'react from node',
+        'koa from node',
+        'react-ssr from node'
+      ]
+    }
+  })
   next()
 })
 
