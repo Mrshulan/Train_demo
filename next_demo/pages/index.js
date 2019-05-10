@@ -4,7 +4,7 @@ import axios from 'axios'
 
 const App = (props) => {
   // getInitialProps就会把异步的数据当做props传进来
-  console.log(props)
+  // console.log(props)
   return (
     <Layout>
       <h1>Welcome to next.js!</h1>
@@ -20,7 +20,10 @@ const App = (props) => {
           </li>
         ))}  
       </ul>
-      {/* next自带babel编译解析styled-jsx 其样式不会应用到子组件 <style jsx global> */}
+      <Link href='/about'>
+        <a>测试redux数据流</a>
+      </Link>
+      {/* next自带babel编译解析styled-jsx 其样式默认不会应用到子组件 应当使用<style jsx global> */}
       <style jsx>{`
       h1 {
         color: blue;

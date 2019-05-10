@@ -17,6 +17,12 @@ app.prepare()
       // 目的要绕过 koa 内置处理，让 next.js 来接手
       ctx.respond = false
     })
+    
+    router.get('/about', async (ctx) => {
+      await app.render(ctx.req, ctx.res, '/about', ctx.query)
+      // 目的要绕过 koa 内置处理，让 next.js 来接手
+      ctx.respond = false
+    })
 
     // 服务器中对 /p/* 开头的路由进行重写，然后重定向到 /post 开头的路由上
     router.get('/p/:id', async (ctx) => {

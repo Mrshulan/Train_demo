@@ -1,22 +1,33 @@
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+// 用于在服务端的钩子  因为没有mock windows
+import { composeWithDevTools } from 'redux-devtools-extension'
+import thunk from 'redux-thunk'
 
-const initialState = { foo: '' }
+const initialState = { count: 0 }
 
 const reducer = (state = initialState, action = {}) => {
   switch(action.type) {
-    case 'FOO':
-      return { ...stat, foo: action.payload }
+    case 'ABOUT/ADD_COUNT':
+      return { count: ++state.count }
     default: 
       return state
   }
 }
 
+export const actions = {
+  addCount: () => {
+    return {
+      type: 'ABOUT/ADD_COUNT'
+    }
+  } 
+}
+// 区别对待production 和 devlopment
 export function makeStore(initialState, { isServer }) {
   initialState || reducer()
 
   if(isServer) {
     // 服务端渲染肯定会先于持久化状态加载
-    return createStore(reducer, initialState)
+    return createStore(reducer, initialState, applyMiddleware(thunk))
   } else {
     // redux-persist 来持久化存放在 Store 里的应用状态
     // 在服务端渲染时也可以初始化 Redux store 的状态，
@@ -29,7 +40,7 @@ export function makeStore(initialState, { isServer }) {
       storage
     }, reducer)
 
-    const store = createStore(persistedReducer, initialState)
+    const store = createStore(persistedReducer, initialState, composeWithDevTools(applyMiddleware(thunk)))
     store.__persistor = persistStore(store)
 
     return store

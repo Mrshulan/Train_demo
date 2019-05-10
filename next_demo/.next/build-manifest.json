@@ -1,41 +1,33 @@
 {
-  "devFiles": [],
+  "devFiles": [
+    "static/development/dll/dll_599a58a60c43245180de.js"
+  ],
   "pages": {
     "/": [
-      "static/runtime/webpack-8ed9452df514b4d17d80.js",
-      "static/chunks/commons.6cfba3c3443e73140316.js",
-      "static/css/styles.37070ff4.chunk.css",
-      "static/chunks/styles.3923efb2bb4b5a985b30.js",
-      "static/runtime/main-aaf1541444c7e3a662c9.js"
+      "static/runtime/webpack.js",
+      "static/css/styles.chunk.css",
+      "static/chunks/styles.js",
+      "static/runtime/main.js"
     ],
     "/_app": [
-      "static/runtime/webpack-8ed9452df514b4d17d80.js",
-      "static/chunks/commons.6cfba3c3443e73140316.js",
-      "static/runtime/main-aaf1541444c7e3a662c9.js"
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
     ],
     "/_error": [
-      "static/runtime/webpack-8ed9452df514b4d17d80.js",
-      "static/chunks/commons.6cfba3c3443e73140316.js",
-      "static/runtime/main-aaf1541444c7e3a662c9.js"
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
     ],
     "/about": [
-      "static/runtime/webpack-8ed9452df514b4d17d80.js",
-      "static/chunks/commons.6cfba3c3443e73140316.js",
-      "static/runtime/main-aaf1541444c7e3a662c9.js"
+      "static/runtime/webpack.js",
+      "static/css/styles.chunk.css",
+      "static/chunks/styles.js",
+      "static/runtime/main.js"
     ],
     "/index": [
-      "static/runtime/webpack-8ed9452df514b4d17d80.js",
-      "static/chunks/commons.6cfba3c3443e73140316.js",
-      "static/css/styles.37070ff4.chunk.css",
-      "static/chunks/styles.3923efb2bb4b5a985b30.js",
-      "static/runtime/main-aaf1541444c7e3a662c9.js"
-    ],
-    "/post": [
-      "static/runtime/webpack-8ed9452df514b4d17d80.js",
-      "static/chunks/commons.6cfba3c3443e73140316.js",
-      "static/css/styles.37070ff4.chunk.css",
-      "static/chunks/styles.3923efb2bb4b5a985b30.js",
-      "static/runtime/main-aaf1541444c7e3a662c9.js"
+      "static/runtime/webpack.js",
+      "static/css/styles.chunk.css",
+      "static/chunks/styles.js",
+      "static/runtime/main.js"
     ]
   }
 }
