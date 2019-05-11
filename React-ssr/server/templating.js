@@ -17,6 +17,10 @@ function templating(props) {
 
 export default function (ctx, next) {
   try {
+    // 在服务端拿到数据注入到js脚本里边 每次node直出页面会覆盖一次
+    // 这里边的data 一般是服务端来请求, 然后注入store里边发给客户端，客户端一般的默认空值
+    // 如果给每个子reducer设置一个loading(true在加载false加载完成)(此时动画控制) 对于其他数据在componentDidMount里边判断一下真实使用的数据
+    // 看是否还要在客户端进行再一次请求
     ctx.render = (data = {}) => {
       const store = createStore(data)
 
