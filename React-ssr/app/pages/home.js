@@ -1,16 +1,49 @@
-import { Link } from 'react-router-dom'
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { getSongList } from '../redux/reducers/home'
 
-const Home = props => (
-  <div>
-    <h1>{ props.title }</h1>
-    <Link to='/list'>跳转列表页</Link>
-  </div>
-)
+class Home extends React.Component {
+  // 若是走node直出getInitialProps执行 且不影响生命周期
+  static getInitialProps(store) {
+    const { getSongList } = mapDispatchToProps(store.dispatch)
+    
+    // 这里必须return Promise 并且这里发起请求走的是node环境 server-entry，api路径必须写绝对路径http://。
+    return Promise.all([
+      getSongList(3)
+    ])
+  }
+
+  render() {
+    const { loaded, songList} = this.props
+    return (
+      <ul>        
+        这里是home界面
+        {
+          loaded ? 
+            正在加载 :
+            songList.map(item => {
+              return  (
+                <li key={item.songmid}>
+                  <Link to={{pathname: '/songList/' + item.songmid, state: {songname: item.songname}}}>
+                    点击去听{item.songname}
+                  </Link></li>
+              )
+            })
+        }
+      </ul>
+    )
+  }
+}
 
 function mapStateToProps(state) {
   return { ...state.home }
 }
+function mapDispatchToProps(dispatch) {
+  return {
+    getSongList: (id) => dispatch(getSongList(id))
+  }
+}
 
-export default connect(mapStateToProps)(Home)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)

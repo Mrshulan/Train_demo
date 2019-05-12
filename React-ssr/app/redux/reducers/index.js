@@ -1,8 +1,8 @@
-import home from './home'
-import list from './list'
+import { homeReducer } from './home'
+import { listReducer } from './list'
 import { combineReducers } from 'redux'
 
 export default combineReducers({
-  home,
-  list,
+  home: homeReducer,
+  list: listReducer,
 })
