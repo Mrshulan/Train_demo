@@ -16,7 +16,7 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    const { songList } = this.props
+    const { songList, getSongList } = this.props
     songList.length || getSongList(3)
   }
 
@@ -27,7 +27,7 @@ class Home extends React.Component {
         这里是home界面
         {
           loaded ? 
-            正在加载 :
+            <div>正在加载...</div> :
             songList.map(item => {
               return  (
                 <li key={item.songmid}>

@@ -16,6 +16,7 @@ export const getSongList = (id) => ({
 })
 
 export function homeReducer (state = initialState, action) {
+  
   switch( action.type ) {
     case 'HOME/FETCH':
       return Object.assign({}, state, { loaded: true });

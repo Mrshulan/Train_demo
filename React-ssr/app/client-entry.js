@@ -4,9 +4,11 @@ import React from 'react'
 import { Provider } from 'react-redux'
 import createApp from './createApp'
 // import 'antd/dist/antd.css'
+const hydratedEl = document.getElementById('SSR_HYDRATED_DATA')
+const hydrateData = JSON.parse(hydratedEl.textContent)
 
-const { router, store } = createApp(window.__STORE__)
-console.log(window.__STORE__)
+const { router, store } = createApp(hydrateData)
+console.log(hydrateData)
 // 在浏览器端渲染时 注水 也就是store
 // 在development下 hyrate text node有警告(仅仅是语义而已)
 // 在production下 hyrate text node无警告
