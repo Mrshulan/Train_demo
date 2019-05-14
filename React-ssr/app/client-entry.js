@@ -3,6 +3,7 @@ import { BrowserRouter } from 'react-router-dom'
 import React from 'react'
 import { Provider } from 'react-redux'
 import createApp from './createApp'
+// import 'antd/dist/antd.css'
 
 const { router, store } = createApp(window.__STORE__)
 console.log(window.__STORE__)

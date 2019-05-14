@@ -10,6 +10,7 @@ module.exports = config => {
     // 出口
     output: {
       path: resolve('dist'),
+      publicPath: config.publicPath,
       // 入口文件产生的js
       filename: config.noHash ? 'js/[name].js' : 'js/[name].[chunkhash].js',
       // 非入口文件生产的js
@@ -33,6 +34,7 @@ module.exports = config => {
                 '@babel/preset-react'
               ],
               plugins: [
+                [ "import",{ libraryName: "antd", style: true }],
                 "@babel/plugin-transform-runtime",
                 ["@babel/plugin-proposal-class-properties", { "loose": false }],
               ]
@@ -44,21 +46,31 @@ module.exports = config => {
           loader: 'html-loader'
         },
         {
-          test: /\.css/,
+          test: /\.(less|css)/,
+          include: [resolve('node_modules')], // 由于默认我们的css module(哈希后缀)单独配置antd的less加载          
           use: [
             MiniCssExtractPlugin.loader,
             {
               loader: 'css-loader',
               options: {
-                  modules: true,
-                  localIdentName: '[path][local]-[hash:base64:5]'
+                importLoaders: 1,
               },
             },
+            {
+              loader: 'less-loader',
+              options: {
+                modifyVars: {
+                  "primary-color": "#00b38a",
+                  "link-color": "#00b38a",
+                },
+                javascriptEnabled: true,
+              }
+            }
           ]
         },
         {
           test: /\.less/,
-          include: [resolve('app')],
+          include: [resolve('app')],     
           use: [
             MiniCssExtractPlugin.loader,
             {

@@ -8,15 +8,17 @@ const config = require('./config')[process.env.NODE_ENV]
 module.exports = merge(baseConfig(config), {
   target: 'node',
   devtool: config.devtool,
+  mode: config.env,
   entry: resolve('app/server-entry.js'),
   output: {
     filename: 'js/server-bundle.js',
     libraryTarget: 'commonjs2'
   },
-  // 服务端打包的时候忽略外部的npm包
+  // 在base.config里边配置了
+  // exclude: [resolve('node_modules')]
+  // 服务端打包的时候忽略外部的npm包 (不知为啥开启这个会报错)
   externals: nodeExternals({
-    // css文件还是要的
-    whitelist: /\.css$/
+    whitelist: [/antd/, /\.(css|less)$/]
   }),
   plugins: [
     new webpack.DefinePlugin({

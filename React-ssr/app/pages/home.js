@@ -2,7 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getSongList } from '../redux/reducers/home'
-
+import styles from './home.less'
+import { Button } from 'antd'
 class Home extends React.Component {
   // 若是走node直出getInitialProps执行 且不影响生命周期
   static getInitialProps(store) {
@@ -14,10 +15,15 @@ class Home extends React.Component {
     ])
   }
 
+  componentDidMount() {
+    const { songList } = this.props
+    songList.length || getSongList(3)
+  }
+
   render() {
     const { loaded, songList} = this.props
     return (
-      <ul>        
+      <ul className={ styles.home }>        
         这里是home界面
         {
           loaded ? 
@@ -26,7 +32,7 @@ class Home extends React.Component {
               return  (
                 <li key={item.songmid}>
                   <Link to={{pathname: '/songList/' + item.songmid, state: {songname: item.songname}}}>
-                    点击去听{item.songname}
+                    <Button type="primary">点击去听</Button>  {item.songname}              
                   </Link></li>
               )
             })
