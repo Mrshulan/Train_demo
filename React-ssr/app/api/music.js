@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const baseUrl = 'http://localhost:6002/musicapi/'
+const baseUrl = 'http://mrshulan.xin/musicapi/'
 
 export const getSongList = (id) => {
   return axios.get(baseUrl + 'getTopid?id=' + id).then(res => res.data)

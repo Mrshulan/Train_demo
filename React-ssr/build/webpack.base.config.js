@@ -98,7 +98,7 @@ module.exports = config => {
       minimizer: [
         new UglifyJsPlugin({
             cache: true,
-            parallel: true,
+            parallel: true, // 多进程压缩
             sourceMap: true // set to true if you want JS source maps
         }),
         new OptimizeCSSAssetsPlugin({})
