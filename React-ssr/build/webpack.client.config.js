@@ -5,10 +5,13 @@ const { resolve } = require('./utils');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const config = require('./config')[process.env.NODE_ENV];
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin
+
 
 const clientConfig = merge(baseConfig(config), {
     entry: resolve('app/client-entry.js'),
-    devtool: config.devtool,
+    // devtool: config.devtool,
+    devtool: process.env.NODE_ENV === 'development' ? config.devtool : '',
     mode: config.env,
     plugins: [
         new webpack.DefinePlugin({
@@ -29,13 +32,13 @@ const clientConfig = merge(baseConfig(config), {
         new HtmlWebpackPlugin({
             filename: 'server.tpl.html',
             template: resolve('app/index.html')
-        })
+        }),
+        // new BundleAnalyzerPlugin()
     ],
 })
 
 if (process.env.NODE_ENV === 'production') {
     clientConfig.optimization.splitChunks = {
-        chunks: 'initial',
         minSize: 0,
         maxAsyncRequests: 5,
         maxInitialRequests: 3,
@@ -51,7 +54,6 @@ if (process.env.NODE_ENV === 'production') {
             }
         }
     };
-
     clientConfig.optimization.runtimeChunk = {
         name: 'manifest',
     };

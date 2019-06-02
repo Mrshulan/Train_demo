@@ -14,7 +14,7 @@ module.exports = config => {
       // 入口文件产生的js
       filename: config.noHash ? 'js/[name].js' : 'js/[name].[chunkhash].js',
       // 非入口文件生产的js
-      chunkFilename: config.noHash ? 'js/[name].js' : 'js/[name].[chunkhash].js'
+      chunkFilename: config.noHash ? 'js/[id].js' : 'js/[id].[chunkhash].js'
     },
     plugins: [
       new MiniCssExtractPlugin({
@@ -99,8 +99,19 @@ module.exports = config => {
         new UglifyJsPlugin({
             cache: true,
             parallel: true, // 多进程压缩
-            sourceMap: true // set to true if you want JS source maps
-        }),
+            sourceMap: true, // set to true if you want JS source maps
+            uglifyOptions: {
+              output: {
+                comments: false, // 删除所有注释
+              },
+              compress: {
+                // warning: false, // 进行删除一些无用代码的时候，不提示警告，
+                drop_console: true, // 过滤掉console
+                collapse_vars: true,  //内嵌已定义但只使用一次的变量
+                reduce_vars: true,  //提取使用多次但没定义的静态值到变量
+              }
+            }
+          }),
         new OptimizeCSSAssetsPlugin({})
       ]
     },

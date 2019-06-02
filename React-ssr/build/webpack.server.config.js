@@ -7,7 +7,7 @@ const config = require('./config')[process.env.NODE_ENV]
 
 module.exports = merge(baseConfig(config), {
   target: 'node',
-  devtool: config.devtool,
+  // devtool: config.devtool,
   mode: config.env,
   entry: resolve('app/server-entry.js'),
   output: {

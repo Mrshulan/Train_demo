@@ -14,7 +14,6 @@
     "dependencies": {
         "antd": "^3.17.0",
         "axios": "^0.18.0",
-        "babel-plugin-import": "^1.11.0",
         "koa": "^2.7.0",
         "koa-router": "^7.4.0",
         "koa-static": "^5.0.0",
@@ -53,6 +52,7 @@
         "@babel/runtime": "^7.3.4",
         "autoprefixer": "^9.5.1",
         "babel-loader": "^8.0.5",
+        "babel-plugin-import": "^1.11.0",
         "chokidar": "^2.1.5",
         "clean-webpack-plugin": "^1.0.1",
         "copy-webpack-plugin": "^5.0.2",
@@ -75,6 +75,7 @@
         "style-loader": "^0.23.1",
         "uglifyjs-webpack-plugin": "^2.1.2",
         "webpack": "^4.29.5",
+        "webpack-bundle-analyzer": "^3.3.2",
         "webpack-cli": "^3.2.3",
         "webpack-dev-server": "^3.2.1",
         "webpack-manifest-plugin": "^2.0.4",
